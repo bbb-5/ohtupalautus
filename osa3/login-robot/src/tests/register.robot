@@ -16,3 +16,11 @@ Register With Already Taken Username And Valid Password
     Input  New Command
     Input Credentials  kalle  jgjrlgr
     Output Should Contain  User with username kalle already exists
+
+Register With Too Short Username And Valid Password
+    Input Credentials  ka  kalleyippee
+    Output Should Contain  Username is too short
+
+Register With Valid Username And Too Short Password
+    Input Credentials  kalle  ty
+    Output Should Contain  Password is too short

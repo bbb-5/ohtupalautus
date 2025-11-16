@@ -26,6 +26,7 @@ class UserService:
 
     def create_user(self, username, password):
         self.validate(username, password)
+        self.check_length(username,password)
 
         user = self._user_repository.create(
             User(username, password)
@@ -38,3 +39,8 @@ class UserService:
             raise UserInputError("Username and password are required")
 
         # toteuta loput tarkastukset tänne ja nosta virhe virhetilanteissa
+    def check_length(self,username, password):
+        if len(username) < 5:
+            raise UserInputError("Username is too short")
+        if len(password) < 5:
+            raise UserInputError("Password are is too short") 
