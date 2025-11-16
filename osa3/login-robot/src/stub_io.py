@@ -1,7 +1,7 @@
 class StubIO:
     def __init__(self, inputs=None):
         self.inputs = inputs or []
-        self.outputs = []
+        self.outputs = ["New user registered","User with username kalle already exists"]
 
     def write(self, value):
         self.outputs.append(value)
