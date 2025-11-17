@@ -1,5 +1,6 @@
 from entities.user import User
 
+MIN_LENGTH = 5
 
 class UserInputError(Exception):
     pass
@@ -27,6 +28,8 @@ class UserService:
     def create_user(self, username, password):
         self.validate(username, password)
         self.check_length(username,password)
+        self.check_whitespace(username)
+        self.check_digits(password)
 
         user = self._user_repository.create(
             User(username, password)
@@ -38,9 +41,18 @@ class UserService:
         if not username or not password:
             raise UserInputError("Username and password are required")
 
-        # toteuta loput tarkastukset tänne ja nosta virhe virhetilanteissa
     def check_length(self,username, password):
-        if len(username) < 5:
+        if len(username) < MIN_LENGTH:
             raise UserInputError("Username is too short")
-        if len(password) < 5:
-            raise UserInputError("Password are is too short") 
+        if len(password) < MIN_LENGTH:
+            raise UserInputError("Password are is too short")
+    
+    def check_whitespace(self, username):
+        if (' ' in username):
+            raise UserInputError("Username not valid, can't include ' '")
+
+    def check_digits(self, password):
+        if any(char.isdigit() for char in password):
+            return
+        else:
+            raise UserInputError("Password needs to include numbers")

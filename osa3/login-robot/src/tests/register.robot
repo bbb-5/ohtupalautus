@@ -21,6 +21,14 @@ Register With Too Short Username And Valid Password
     Input Credentials  ka  kalleyippee
     Output Should Contain  Username is too short
 
+Register With Enough Long But Invalid Username And Valid Password
+    Input Credentials  kalle wow  tyjgelkge
+    Output Should Contain  Password needs to include numbers
+
 Register With Valid Username And Too Short Password
     Input Credentials  kalle  ty
     Output Should Contain  Password is too short
+
+Register With Valid Username And Long Enough Password Containing Only Letters
+    Input Credentials  kalle  tyjgelkge
+    Output Should Contain  Password needs to include numbers
